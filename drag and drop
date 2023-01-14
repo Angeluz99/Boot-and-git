@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-18">
+    <title>Drag and drop</title>
+    <style>
+        #containers div{
+           width:200px;
+           height: 200px;
+           background: blue;
+           margin: 5px;
+        } 
+        #dragable, #dragable2{
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            background-color: green;
+            cursor: move;
+        }
+
+
+    </style>     
+</head>    
+<body>
+
+    <div id="containers">
+    <div id="0" ondrop="drop(event)" ondragover="allowDrop(event)"> container uno</div>
+    <div id="1" ondrop="drop(event)" ondragover="allowDrop(event)">container dos</div>  
+    </div>  
+
+    <div id =drags>
+    <div id="dragable"  draggable="true" ondragstart="drag(event)"> drag uno</div>
+    <div id="dragable2" draggable="true" ondragstart="drag(event)">drag dos</div>
+    </div>
+
+    <script>
+        let arreglo = ["", ""];
+        
+        function allowDrop(ev){
+            ev.preventDefault();
+        }
+
+        function drag(ev){
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+
+        function drop(ev){
+            if(arreglo[parseInt(ev.target.id)] = ""){
+                let data = ev.dataTransfer.getData("text");
+                arreglo[parseInt(ev.target.id)] = data;
+                ev.target.appendChild(document.getElementById(data));  
+            }
+
+            // if(arreglo[0] != "" && arreglo[1] != "" ){
+
+            //      if (arreglo[0] == "dragable" && arreglo[1] == "dragable2" ){
+            //          alert("Yes");
+            //      }else{alert("Nop");
+            //     }
+            //  }
+        }
+
+
+        
+        console.log (arreglo);
+        // console.log(container2.dataset);
+
+
+        // const idText = e.dataTransfer.getData('text')
+
+        // container.addEventListener('drop', (e) => {
+        //     e.preventDefault()
+        //     let element = document.getElementById(e.dataTransfer.getData('text'))
+        //     container.append(drags.removeChild(element))
+        // })
+
+        // container2.addEventListener('drop', (e) => {
+        //     e.preventDefault()
+        //     let element = document.getElementById(e.dataTransfer.getData('text'))
+        //     container2.append(drags.removeChild(element))
+        //     let dragData = document.getElementById(e.dataTransfer.getData('id'))
+
+        // })                                 
+        
+
+    </script>
+</body>
+</html>
